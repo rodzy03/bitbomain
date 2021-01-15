@@ -24,7 +24,7 @@ class Controller extends BaseController
 		{
             try 
             {
-                //DB::table('t_users')->where('username','GILBERT.CATAMBAY')->update(['password'=>bcrypt('secretary')]);
+                //DB::table('t_users')->where('username','admin')->update(['password'=>bcrypt('admin')]);
                 DB::connection()->getPdo();
                 $test_connection = db::table('t_users')->get();
                 

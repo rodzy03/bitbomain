@@ -236,6 +236,30 @@
 		});
 	});
 
+	function formatCtrlNo(control_no) {
+
+		if(control_no != null) 
+		{
+			control_no = control_no.split("-")
+			if(control_no[4] <= 99) {
+				control_no[4] = '0000' + control_no[4]
+			}
+			else if(control_no[4] <= 999) {
+				control_no[4] = '000' + control_no[4]
+			}
+			else if(control_no[4] <= 9999) {
+				control_no[4] = '00' + control_no[4]
+			}
+			if(control_no[3] <= 9) {
+				control_no[3] = '00' + control_no[3]
+			}
+
+			return control_no[0] + '-' + control_no[1] + '-' + control_no[3] + '-' + control_no[2] + '-' + control_no[4];
+		}
+		else
+			return '';
+		
+	}
 	$('#tbl_business_approved_lst').on('click', '#btnPrintClearance', function(){
 
 		let row = $(this).closest("tr")
@@ -271,49 +295,39 @@
 				{
 					// alert(response)
 					var company_name, address, nature_business, tax_year, quarter, or_no, or_date, or_amount, barangay_permit, business_tax, garbage_fee, signboard, ctc;
-					$.each(response["business_permit"], function() {
+						$.each(response["business_permit"], function() {
 
-						company_name = this["BUSINESS_NAME"];
-						address = this["BUSINESS_ADDRESS"];
-						nature_business = this["BUSINESS_NATURE_NAME"];
-						tax_year = this["TAX_YEAR"];
-						quarter = this["QUARTER"];
-						or_no = this["OR_NO"];
-						or_date = this["OR_DATE"];
-						or_amount = this["OR_AMOUNT"];
-						barangay_permit = this["BARANGAY_PERMIT"];
-						business_tax = this["BUSINESS_TAX"];
-						garbage_fee = this["GARBAGE_FEE"];
-						signboard = this["SIGNBOARD"];
-						ctc = this["CTC"];
-						control_no = this["CONTROL_NO"];
-						issued_date = this['ISSUED_DATE'];
-					});
+							company_name = this["BUSINESS_NAME"];
+							address = this["BUSINESS_ADDRESS"];
+							nature_business = this["BUSINESS_NATURE_NAME"];
+							tax_year = this["TAX_YEAR"];
+							quarter = this["QUARTER"];
+							or_no = this["OR_NO"];
+							or_date = this["OR_DATE"];
+							or_amount = this["OR_AMOUNT"];
+							barangay_permit = this["BARANGAY_PERMIT"];
+							business_tax = this["BUSINESS_TAX"];
+							garbage_fee = this["GARBAGE_FEE"];
+							signboard = this["SIGNBOARD"];
+							ctc = this["CTC"];
+							control_no = this["CONTROL_NO"];
+							issued_date = this['ISSUED_DATE'];
+							account_no = this['BUSINESS_OR_NUMBER'];
 
-						control_no = control_no.split("-")
-						if(control_no[4] <= 99) {
-							control_no[4] = '0000' + control_no[4]
-						}
-						else if(control_no[4] <= 999) {
-							control_no[4] = '000' + control_no[4]
-						}
-						else if(control_no[4] <= 9999) {
-							control_no[4] = '00' + control_no[4]
-						}
-						if(control_no[3] <= 9) {
-							control_no[3] = '00' + control_no[3]
-						}
-
-						control_no = control_no[0] + '-' + control_no[1] + '-' + control_no[3] + '-' + control_no[2] + '-' + control_no[4] 
+						});
+						// original format
+						
+						valid_until = moment().add(1, 'Y').format('YYYY');
+						control_no = formatCtrlNo(control_no);
 						//set value here
 						$("#lbl_control_no_b_r").text(control_no);
-						//set value here
+						$('#lbl_account_no_p').text(account_no);
 						$("#lbl_company_name").text(company_name);
 						$("#lbl_business_address").text(address);
 						$("#lbl_line_business").text(nature_business);
 						$("#lbl_or_number").text(or_no);
 						$("#lbl_or_date").text(or_date);
-						$("#lbl_or_amount").text(or_amount);
+						$("#lbl_amount_p").text(or_amount);
 						$("#lbl_barangay_permit").text(barangay_permit);
 						$("#lbl_business_tax").text(business_tax);
 						$("#lbl_garbage_fee").text(garbage_fee);
@@ -360,6 +374,7 @@
 			   		});
 
 						//set value here
+						control_no = formatCtrlNo(control_no);
 						barangayName = '{{session('session_barangay_name')}}'
 						barangayName = barangayName.charAt(0).toUpperCase() 
 									 + barangayName.slice(1).toLowerCase()
@@ -432,6 +447,7 @@
 					provinceName = provinceName.charAt(0).toUpperCase() 
 								 + provinceName.slice(1).toLowerCase()
 					address += ', Barangay ' + barangayName + ' ' + municipalName  + ', ' + provinceName
+					control_no = formatCtrlNo(control_no);
 					//set value here
 			   		// $("#").text();
 			   		$("#lbl_control_no_b").text(control_no);
@@ -530,41 +546,44 @@
 						mudguard_no = this["D_MUDGUARD_NO"];
 						cr_no = this["D_CR_NO"];
 						or_no_driver = this["D_OR_NO"];
+						or_date_d = this["D_OR_DATE"];
 						or_no = this["OR_NO"];
 						or_date = this["OR_DATE"];
 						or_amount = this["OR_AMOUNT"];
 						control_no = this["CONTROL_NO"];
 						make = this['MAKE'];
 						plate_no = this['PLATE_NO'];
+						cr_date = this['DTI_NO_DATE'];
+						account_no = this['BUSINESS_OR_NUMBER'];
+						owners_address = this['OWNER_ADDRESS']
 					});
 					//set value here
-					barangayName = '{{session('session_barangay_name')}}'
-					barangayName = barangayName.charAt(0).toUpperCase() 
-								 + barangayName.slice(1).toLowerCase()
-					municipalName = '{{session('session_municipal_name')}}'
-					municipalName = municipalName.charAt(0).toUpperCase() 
-								  + municipalName.slice(1).toLowerCase()
-					provinceName = '{{session('session_province_name')}}'
-					provinceName = provinceName.charAt(0).toUpperCase() 
-								 + provinceName.slice(1).toLowerCase()
-					address += ', Barangay ' + barangayName + ' ' + municipalName  + ', ' + provinceName
 
+					control_no = formatCtrlNo(control_no);
+
+					 
 					$("#lbl_control_no_d").text(control_no);
-					$("#lbl_or_no_d").text(or_no);
+					$('#lbl_or_no_d').text(or_no)
 					$("#lbl_or_date_d").text(or_date);
-					$("#lbl_amount_d").text(or_amount);
+					
+					$("#lbl_or_cr_d").text(or_no_driver);
+					
 					$("#lbl_tricycle_operator_d").text(tricycle_operator);
-					$("#lbl_company_name_d").text(company_name);
-					$("#lbl_address_d").text(address);
+					
+					$("#lbl_address_d").text(owners_address);
 					$('#lbl_address_d').css('text-transform','capitalize');
 					$("#lbl_drivers_license_d").text(driver_license);
 					$("#lbl_mudguard_no_d").text(mudguard_no);
 					$("#lbl_cr_no_d").text(cr_no);
-					$("#lbl_or_no_driver_d").text(or_no_driver);
-					$('#lbl_plate_no').val(plate_no);
-
-					console.log(response)
-
+					
+					$("#lbl_make").text(make)
+					$('#lbl_plate_no_d').text(plate_no);
+					$('#lbl_cr_date').text(cr_date);
+					$('#lbl_accountno_d').text(account_no);
+					$('#lbl_garage').text(address);
+					$('#lbl_amount_d').text(or_amount);
+						 
+					$('#lbl_d_or_date_d').text(or_date_d);
 				 	//print here
 					$("#fmbc001d").printThis({
 					 	debug: false,              
@@ -658,6 +677,8 @@
 		  return d.date() != fm.date() && fm.isSame(fmEnd.format('YYYY-MM-DD')) ? fm.add(1, 'd') : fm;  
 	}
 
+	
+
 	$('#tbl_approved_issuance_resident').on('click', '#btnPrintCertificate', function(){
 		let row = $(this).closest("tr")
 		, resident_name =  $(row.find("td")[0]).text()
@@ -711,19 +732,8 @@
 						});
 						// console.log(sex)
 							or_date = or_date.split(" ")
-							control_no = control_no.split("-")
-							if(control_no[4] <= 99){
-								control_no[4] = '000' + control_no[4]
-							}
-							else if(control_no[4] <= 999){
-								control_no[4] = '00' + control_no[4]
-							}
-							else if(control_no[4] <= 9999){
-								control_no[4] = '0' + control_no[4]
-							}
-							if(control_no[3] <= 9){
-								control_no[3] = '0' + control_no[3]
-							}
+							
+							control_no = formatCtrlNo(control_no);
 							barangayName = '{{session('session_barangay_name')}}'
 							barangayName = barangayName.charAt(0).toUpperCase() + barangayName.slice(1).toLowerCase()
 							municipalName = '{{session('session_municipal_name')}}'
@@ -732,7 +742,7 @@
 							provinceName = provinceName.charAt(0).toUpperCase() + provinceName.slice(1).toLowerCase()
 							address += ' Barangay ' + barangayName + ' ' + municipalName  + ', ' + provinceName 
 							//set value here
-							$("#lbl_control_no_a_r").text(control_no[0] + '-' + control_no[1] + '-' + control_no[2] + '-' + control_no[3] + '-' + control_no[4] );
+							$("#lbl_control_no_a_r").text(control_no);
 							$("#lbl_applicant_a_r").text(applicant)
 							$("#lbl_civil_status_a_r").text(civil_status)
 							$("#lbl_address_a_r").text(address)
@@ -792,19 +802,7 @@
 							calamity_date = this["CALAMITY_DATE"];
 						});
 							or_date = or_date.split(" ")
-							control_no = control_no.split("-")
-							if(control_no[4] <= 99){
-								control_no[4] = '000' + control_no[4]
-							}
-							else if(control_no[4] <= 999){
-								control_no[4] = '00' + control_no[4]
-							}
-							else if(control_no[4] <= 9999){
-								control_no[4] = '0' + control_no[4]
-							}
-							if(control_no[3] <= 9){
-								control_no[3] = '0' + control_no[3]
-							}
+							control_no = formatCtrlNo(control_no);
 
 							barangayName = '{{session('session_barangay_name')}}'
 							barangayName = barangayName.charAt(0).toUpperCase() + barangayName.slice(1).toLowerCase()
@@ -815,7 +813,7 @@
 							address += ' Barangay ' + barangayName + ' ' + municipalName  + ', ' + provinceName 
 							
 							//set value here
-							$("#lbl_control_no_b_r").text(control_no[0] + '-' + control_no[1] + '-' + control_no[2] + '-' + control_no[3] + '-' + control_no[4] );
+							$("#lbl_control_no_b_r").text(control_no);
 							$("#lbl_or_no_b_r").text(or_no);
 							$("#lbl_or_date_b_r").text(or_date[0]);
 							$("#lbl_amount_b_r").text(or_amount);
@@ -864,19 +862,7 @@
 							country = this["COUNTRY"];
 						});
 							or_date = or_date.split(" ")
-							control_no = control_no.split("-")
-							if(control_no[4] <= 99){
-								control_no[4] = '000' + control_no[4]
-							}
-							else if(control_no[4] <= 999){
-								control_no[4] = '00' + control_no[4]
-							}
-							else if(control_no[4] <= 9999){
-								control_no[4] = '0' + control_no[4]
-							}
-							if(control_no[3] <= 9){
-								control_no[3] = '0' + control_no[3]
-							}
+							control_no = formatCtrlNo(control_no);
 							barangayName = '{{session('session_barangay_name')}}'
 							barangayName = barangayName.charAt(0).toUpperCase() + barangayName.slice(1).toLowerCase()
 							municipalName = '{{session('session_municipal_name')}}'
@@ -886,7 +872,7 @@
 							address += ' Barangay ' + barangayName + ' ' + municipalName  + ', ' + provinceName 
 							
 							//set value here
-							$("#lbl_control_no_c_r").text(control_no[0] + '-' + control_no[1] + '-' + control_no[2] + '-' + control_no[3] + '-' + control_no[4] );
+							$("#lbl_control_no_c_r").text(control_no);
 							$("#lbl_or_no_c_r").text(or_no);
 							$("#lbl_or_date_c_r").text(or_date[0]);
 							$("#lbl_amount_c_r").text(or_amount);
@@ -942,19 +928,7 @@
 							else
 								he_she = "he";
 							or_date = or_date.split(" ")
-							control_no = control_no.split("-")
-							if(control_no[4] <= 99){
-								control_no[4] = '000' + control_no[4]
-							}
-							else if(control_no[4] <= 999){
-								control_no[4] = '00' + control_no[4]
-							}
-							else if(control_no[4] <= 9999){
-								control_no[4] = '0' + control_no[4]
-							}
-							if(control_no[3] <= 9){
-								control_no[3] = '0' + control_no[3]
-							}
+							control_no = formatCtrlNo(control_no);
 							barangayName = '{{session('session_barangay_name')}}'
 							barangayName = barangayName.charAt(0).toUpperCase() + barangayName.slice(1).toLowerCase()
 							municipalName = '{{session('session_municipal_name')}}'
@@ -964,7 +938,7 @@
 							address += ' Barangay ' + barangayName + ' ' + municipalName  + ', ' + provinceName 
 							
 							//set value here
-							$("#lbl_control_no_d_r").text(control_no[0] + '-' + control_no[1] + '-' + control_no[2] + '-' + control_no[3] + '-' + control_no[4] );
+							$("#lbl_control_no_d_r").text(control_no);
 							$("#lbl_or_no_d_r").text(or_no);
 							$("#lbl_or_date_d_r").text(or_date[0]);
 							$("#lbl_amount_d_r").text(or_amount);
@@ -1020,36 +994,26 @@
 						
 							child_name = response['child'][0]["FIRSTNAME"] + ' ' + response['child'][0]["LASTNAME"]
 							chile_age = getAge(response['child'][0]['DATE_OF_BIRTH'])
-							if(response['child'].length == '2'){
+							if(response['child'].length == '2') {
 								child_name_2 = response['child'][1]["FIRSTNAME"] + ' ' + response['child'][1]["FIRSTNAME"]
 								chile_age_2 = getAge(response['child'][1]['DATE_OF_BIRTH'])
+							
 							}
-							else{
+							else
+							{
 								child_name_2 = ''
 								chile_age_2 = ''
 							}
 						
 
-						var he_she; 
-						if (sex_address == "her")
-							he_she = "she";
-						else
-							he_she = "he";
+							var he_she; 
+							if (sex_address == "her")
+								he_she = "she";
+							else
+								he_she = "he";
 
-						or_date = or_date.split(" ")
-							control_no = control_no.split("-")
-							if(control_no[4] <= 99){
-								control_no[4] = '000' + control_no[4]
-							}
-							else if(control_no[4] <= 999){
-								control_no[4] = '00' + control_no[4]
-							}
-							else if(control_no[4] <= 9999){
-								control_no[4] = '0' + control_no[4]
-							}
-							if(control_no[3] <= 9){
-								control_no[3] = '0' + control_no[3]
-							}
+							or_date = or_date.split(" ")
+							control_no = formatCtrlNo(control_no);
 							barangayName = '{{session('session_barangay_name')}}'
 							barangayName = barangayName.charAt(0).toUpperCase() + barangayName.slice(1).toLowerCase()
 							municipalName = '{{session('session_municipal_name')}}'
@@ -1059,7 +1023,7 @@
 							address += ' Barangay ' + barangayName + ' ' + municipalName  + ', ' + provinceName 
 							
 							//set value here
-							$("#lbl_control_no_e_r").text(control_no[0] + '-' + control_no[1] + '-' + control_no[2] + '-' + control_no[3] + '-' + control_no[4] );
+							$("#lbl_control_no_e_r").text(control_no);
 							$("#lbl_or_no_e_r").text(or_no);
 							$("#lbl_or_date_e_r").text(or_date[0]);
 							$("#lbl_amount_e_r").text(or_amount);
@@ -1116,19 +1080,7 @@
 
 						});
 							or_date = or_date.split(" ")
-							control_no = control_no.split("-")
-							if(control_no[4] <= 99){
-								control_no[4] = '000' + control_no[4]
-							}
-							else if(control_no[4] <= 999){
-								control_no[4] = '00' + control_no[4]
-							}
-							else if(control_no[4] <= 9999){
-								control_no[4] = '0' + control_no[4]
-							}
-							if(control_no[3] <= 9){
-								control_no[3] = '0' + control_no[3]
-							}
+							control_no = formatCtrlNo(control_no);
 							barangayName = '{{session('session_barangay_name')}}'
 							barangayName = barangayName.charAt(0).toUpperCase() + barangayName.slice(1).toLowerCase()
 							municipalName = '{{session('session_municipal_name')}}'
@@ -1137,7 +1089,7 @@
 							provinceName = provinceName.charAt(0).toUpperCase() + provinceName.slice(1).toLowerCase()
 							address += ' Barangay ' + barangayName + ' ' + municipalName  + ', ' + provinceName 
 							//set value here
-							$("#lbl_control_no_f_r").text(control_no[0] + '-' + control_no[1] + '-' + control_no[2] + '-' + control_no[3] + '-' + control_no[4] );
+							$("#lbl_control_no_f_r").text(control_no);
 							$("#lbl_or_no_f_r").text(or_no);
 							$("#lbl_or_date_f_r").text(or_date[0]);
 							$("#lbl_amount_f_r").text(or_amount);
@@ -1192,19 +1144,7 @@
 							var month = d.getMonth() + 1; // Since getMonth() returns month from 0-11 not 1-12
 							var year = d.getFullYear();
 							dateStr  = date + "/" + month + "/" + year;
-							control_no = control_no.split("-")
-							if(control_no[4] <= 99){
-								control_no[4] = '000' + control_no[4]
-							}
-							else if(control_no[4] <= 999){
-								control_no[4] = '00' + control_no[4]
-							}
-							else if(control_no[4] <= 9999){
-								control_no[4] = '0' + control_no[4]
-							}
-							if(control_no[3] <= 9){
-								control_no[3] = '0' + control_no[3]
-							}
+							control_no = formatCtrlNo(control_no);
 							barangayName = '{{session('session_barangay_name')}}'
 							barangayName = barangayName.charAt(0).toUpperCase() + barangayName.slice(1).toLowerCase()
 							municipalName = '{{session('session_municipal_name')}}'
@@ -1213,7 +1153,7 @@
 							provinceName = provinceName.charAt(0).toUpperCase() + provinceName.slice(1).toLowerCase()
 							address += ' Barangay ' + barangayName + ' ' + municipalName  + ', ' + provinceName 
 							//set value here
-							$(".ctrl_no").text(control_no[0] + '-' + control_no[1] + '-' + control_no[2] + '-' + control_no[3] + '-' + control_no[4] );
+							$(".ctrl_no").text(control_no);
 							$(".date_issued").text(dateStr);
 							$(".itinerant_name").text(applicant);
 							$(".address").text(address)
@@ -1285,23 +1225,7 @@
 						$('#lbl_purpose').css('text-transform','uppercase');
 						$('#lbl_remarks').css('text-transform','uppercase');
 
-						if(control_no != '' || control_no != null) {
-
-							control_no = control_no.split("-")
-							if(control_no[4] <= 99) 
-								control_no[4] = '000' + control_no[4]
-							else if(control_no[4] <= 999) 
-								control_no[4] = '00' + control_no[4]
-							
-							else if(control_no[4] <= 9999) 
-								control_no[4] = '0' + control_no[4]
-							
-							if(control_no[3] <= 9) 
-								control_no[3] = '0' + control_no[3]
-							
-							control_no = control_no[0] + '-' + control_no[1] + '-' + control_no[2] 
-													   + '-' + control_no[3] + '-' + control_no[4];
-						} 
+						control_no = formatCtrlNo(control_no);
 						
 						barangayName = '{{session('session_barangay_name')}}'
 						barangayName = barangayName.charAt(0).toUpperCase() 

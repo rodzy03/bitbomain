@@ -60,6 +60,7 @@
 						<th hidden>Area</th>
 						<th hidden>gross ess</th>
 						<th hidden>gross noness</th>
+						<th hidden>DTI Reg no.</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -90,6 +91,8 @@
 						<td hidden> {{$row->BUSINESS_AREA}}</td>
 						<td hidden>{{$row->GROSS_RECEIPTS_ESSENTIAL}}</td>
 						<td hidden>{{$row->GROSS_RECEIPTS_NON_ESSENTIAL}}</td>
+						
+						<td hidden>{{$row->DTI_REGISTRATION_NO}}</td>
 					</tr>
 					@endforeach
 				</tbody>
@@ -350,6 +353,12 @@
 									</div>
 								</div>
 								<div class="form-group row m-b-10">
+									<label class="col-md-4 col-form-label text-md-right">OR Date</label>
+									<div class="col-md-8">
+										<input type="date"  class="form-control" id="txt_or_date_d">
+									</div>
+								</div>
+								<div class="form-group row m-b-10">
 									<label class="col-md-4 col-form-label text-md-right">Make</label>
 									<div class="col-md-8">
 										<input type="text"  class="form-control" id="txt_make">
@@ -513,7 +522,9 @@
 		, business_area = $(row.find("td")[7]).text()
 		, gross_essential = $(row.find("td")[8]).text()
 		, gross_nonessential = $(row.find("td")[9]).text()
+		, dti_reg = $(row.find("td")[10]).text()
 		;
+		
 		
 		$('#txt_applicant_name').val(business_owner);
 		// alert(business_nature);
@@ -543,7 +554,8 @@
 		//Clearance Tricycle
 		$('#txt_company_name_d').val(business_name);
 		$('#txt_address_d').val(business_address);
-
+		$('#txt_tricycle_operator_d').val(business_owner);
+		$('#txt_cr_d').val(dti_reg)
 		//Clearance General Purpose
 		$('#txt_company_name_e').val(business_name);
 		$('#txt_address_e').val(business_address);
@@ -773,6 +785,7 @@
 			,'D_MUDGUARD_NO' : $("#txt_mudguard_d").val()//mudguard no
 			,'D_CR_NO' : $("#txt_cr_d").val()//cr no
 			,'D_OR_NO' : $("#txt_or_d").val()//or no
+			,'D_OR_DATE' : $('#txt_or_date_d').val() // or date
 			,'D_MAKE' : make
 			,'D_PLATE' : plate_no
 

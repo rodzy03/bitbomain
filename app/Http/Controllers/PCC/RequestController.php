@@ -11,29 +11,29 @@ class RequestController extends Controller
    public function index($typeofview)
    {
 
-    	$approved_business = DB::table('v_official_business_list')->where('STATUS','Approved')->get();
-    	$business_nature = DB::table('v_business_nature')->get();
+        $approved_business = DB::table('v_official_business_list')->where('STATUS','Approved')->get();
+        $business_nature = DB::table('v_business_nature')->get();
         $resident = DB::table('v_resident')->get();
         $child = DB::table('t_resident_basic_info')
             ->join('t_children_profile',  't_resident_basic_info.resident_id','=','t_children_profile.RESIDENT_ID')
             ->get();
-   		$pending_application_form = DB::table('v_pending_application_form')->get();
+        $pending_application_form = DB::table('v_pending_application_form')->get();
         $approved_application_form = DB::table('v_approved_application_form')->get();
         $declined_application_form = DB::table('v_declined_application_form')->get();
 
         if($typeofview == "RequestPermit") {
 
-        	return view('permit_certification_clearance.permit'
+            return view('permit_certification_clearance.permit'
                 , compact('approved_business', 'business_nature'));
 
         } else if ($typeofview == "RequestCertification") {
 
             //dd($resident);
-        	return view('permit_certification_clearance.certificate', compact('resident','child'));
+            return view('permit_certification_clearance.certificate', compact('resident','child'));
 
         }
         else if ($typeofview == "RequestClearance") {
-        	
+            
             return view('permit_certification_clearance.clearance'
                 , compact('approved_business', 'business_nature'));
         }
@@ -98,6 +98,7 @@ class RequestController extends Controller
             $D_OR_NO = $request->D_OR_NO;
             $D_MAKE = $request->D_MAKE;
             $D_PLATE = $request->D_PLATE;
+            $D_OR_DATE = $A_PROJECT_LOCATIONrequest->D_OR_DATE;
         //Clearance General Purpose - E
             $E_PURPOSE = $request->E_PURPOSE;
             $E_REGISTERED_NAME = $request->E_REGISTERED_NAME;
@@ -266,6 +267,7 @@ class RequestController extends Controller
                     ,'D_MUDGUARD_NO' => $D_MUDGUARD_NO
                     ,'D_CR_NO' => $D_CR_NO
                     ,'D_OR_NO' => $D_OR_NO
+                    ,'D_OR_DATE' => $D_OR_DATE
                     ,'FORM_ID' => $latest_form_id
                     ,'MAKE' => $D_MAKE
                     ,'PLATE_NO' => $D_PLATE
@@ -390,7 +392,7 @@ class RequestController extends Controller
                     'PURPOSE' => $F_PURPOSE
                     ,'FORM_ID' => $latest_form_id
                     ,'MAIDEN_NAME' => $MAIDEN_NAME
-                    ,'VALID_UNTIL' => $VALID_UNTIL 
+                    
                 ));
 
             return response()->json(['message' => "success" ]);

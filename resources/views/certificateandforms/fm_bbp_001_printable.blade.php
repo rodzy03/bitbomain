@@ -250,10 +250,19 @@ Calibri;mso-bidi-theme-font:minor-latin'>Municipality of <span class=SpellE>Tana
 text-align:center;line-height:normal;background:white'><b><span
 style='font-size:20.0pt;mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:
 Calibri;mso-bidi-theme-font:minor-latin;color:red;letter-spacing:-.75pt;
-mso-fareast-language:EN-PH'>BARANGAY {{ session('session_barangay_name')}}<o:p></o:p></span></b></p>
+mso-fareast-language:EN-PH'>BARANGAY {{ session('session_barangay_name')}}<o:p></o:p></span>
+</b></p>
 
-<p class=MsoNormal align=center style='margin-bottom:0in;text-align:center;
-line-height:normal'><span lang=EN-PH style='font-size:10.0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;text-align:
+justify;line-height:normal;background:white'><span style='font-size:17.0pt;
+font-family:"Arial",sans-serif;mso-fareast-font-family:"Times New Roman";
+mso-fareast-language:EN-PH'><o:p>&nbsp;</o:p></span></p>
+  
+<p class=MsoNormal align=center style='margin-bottom:0in;margin-bottom:.0001pt;text-align:
+center;line-height:normal;background:white'><span style='font-size:29px;font-family:"Arial",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:red;mso-color-alt:windowtext;mso-fareast-language:
+EN-PH'>TANGGAPAN NG PUNONG BARANGAY</span></p><br>
 
 <p class=MsoNormal align=center style='margin-bottom:0in;text-align:center;
 line-height:normal'><b style='mso-bidi-font-weight:normal'><span lang=EN-PH
@@ -266,15 +275,18 @@ line-height:normal'><span lang=EN-PH style='font-size:10.0pt'>(BUSINESS PERMIT)<
 line-height:normal'><span lang=EN-PH style='font-size:10.0pt'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal style='margin-bottom:0in;text-align:justify;line-height:
-normal'><span lang=EN-PH style='font-size:10.0pt'>MATALASTAS NG LAHAT:<span
+normal'><span lang=EN-PH style='font-size:10.0pt'>MATALASTAS NG LAHAT:    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
 style='mso-tab-count:7'>                                                                                                   </span>Control
 <span class=GramE>No :</span><span style='mso-spacerun:yes'> 
 </span><o:p id=lbl_control_no_b_r></o:p></span></p>
 
 <p class=MsoNormal style='margin-bottom:0in;text-align:justify;line-height:
 normal'><span lang=EN-PH style='font-size:10.0pt'>(KNOW ALL MEN BY THERE
-PRESENTS)<span style='mso-tab-count:5'>                                                                           </span>Issued
-Date:<span style='mso-spacerun:yes'>  </span><o:p id=lbl_issued_date></o:p></span></p>
+PRESENTS)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='mso-tab-count:5'>                                                                           </span>Issued
+Date:<span style='mso-spacerun:yes'> </span><o:p id=lbl_issued_date></o:p></span></p>
+
+<!-- <p class=MsoNormal style='margin-bottom:0in;text-align:justify;line-height:
+normal'><span lang=EN-PH style='font-size:10.0pt'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='mso-tab-count:5'>                                                                           </span>Amount:&nbsp;Php&nbsp;<span style='mso-spacerun:yes'> </span><o:p id=lbl_amount_p></o:p></span></p> -->
 
 <p class=MsoNormal style='margin-bottom:0in;text-align:justify;line-height:
 normal'><span lang=EN-PH style='font-size:10.0pt'><o:p>&nbsp;</o:p></span></p>
@@ -291,6 +303,10 @@ line-height:normal'><span lang=EN-PH style='font-size:10.0pt'><o:p>&nbsp;</o:p><
 <p class=MsoNormal align=center style='margin-bottom:0in;text-align:center;
 line-height:normal'><b style='mso-bidi-font-weight:normal'><u><span lang=EN-PH
 style='font-size:10.0pt'><o:p id=lbl_company_name></o:p></span></u></b></p>
+
+<p class=MsoNormal align=center style='margin-bottom:0in;text-align:center;
+line-height:normal'><b style='mso-bidi-font-weight:normal'><u><span lang=EN-PH
+style='font-size:10.0pt'><o:p id=lbl_account_no_p></o:p></span></u></b></p>
 
 <p class=MsoNormal align=center style='margin-bottom:0in;text-align:center;
 line-height:normal'><span lang=EN-PH style='font-size:10.0pt'><o:p>&nbsp;</o:p></span></p>
@@ -348,7 +364,8 @@ line-height:normal'><span lang=EN-PH style='font-size:10.0pt'><o:p>&nbsp;</o:p><
 text-align:center;line-height:normal'><span class=SpellE><span
 style='font-size:17.0pt;mso-bidi-font-family:Calibri;mso-bidi-theme-font:minor-latin'>Ngayong</span></span><span
 style='font-size:17.0pt;mso-bidi-font-family:Calibri;mso-bidi-theme-font:minor-latin'>
-<span class=SpellE>ika</span> - <u>(<span class=SpellE><?php echo date('d') ?></span>)</u> ng <u>(<span
+<span class=SpellE>ika</span> - <u> <span class=SpellE><?php echo date('d') ?></span> </u> ng <u>
+	<span
 class=SpellE> <?php 
 	if (date('m') == 01)
 		echo 'Enero';
@@ -377,8 +394,7 @@ class=SpellE> <?php
 	
 
 		
-
-?></span> at <span class=SpellE><?php echo date('Y') ?></span>)<o:p></o:p></u></span></p>
+?></span> at <span class=SpellE><?php echo date('Y') ?></span><o:p></o:p></u></span></p>
 
 <p class=MsoNormal align=center style='margin-bottom:0in;text-align:center;
 line-height:normal'><span lang=EN-PH style='font-size:10.0pt'>(on <span
@@ -395,7 +411,12 @@ line-height:normal'><span lang=EN-PH style='font-size:10.0pt'><o:p>&nbsp;</o:p><
 line-height:normal'><span lang=EN-PH style='font-size:12.0pt'>Ang <span
 class=SpellE>pahintulot</span> <span class=SpellE>na</span> <span class=SpellE>ito</span>
 ay <span class=SpellE>matatapos</span> <span class=SpellE>sa</span> <span
-class=SpellE>ika</span> – 31 of December (YYYY)<o:p></o:p></span></p>
+class=SpellE>ika</span> – 31 of December 
+<?php 
+//$date = strtotime(date('Y')); 
+//$new_date = strtotime('+ 1 year', $date); , $new_date
+echo date('Y');
+?><o:p></o:p></span></p>
 
 <p class=MsoNormal align=center style='margin-bottom:0in;text-align:center;
 line-height:normal'><span lang=EN-PH style='font-size:10.0pt'>(This permit

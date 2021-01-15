@@ -74,7 +74,7 @@ class EvaluationController extends Controller
             ->get();
             
         $count = $approved->count()+1;
-        $form_number = "FM-BBP" . "-0" . $YEAR_MONTH . "-" .$count ;
+        $form_number = "FM-BBP" . "-" . $YEAR_MONTH . "-" .$count ;
         
         
         $ap_evaluation = DB::table('t_application_form_evaluation')

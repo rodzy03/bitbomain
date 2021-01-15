@@ -103,7 +103,7 @@
 							@foreach($approved_business as $row)
 							<tr class="gradeC" id="{{$row->BUSINESS_ID}}">
 								<td>{{$row->BUSINESS_OR_NUMBER}}</td>
-								<td>{{$row->BUSINESS_NAME}} <br> ({{$row->BUSINESS_NATURE_NAME}})</td>
+								<td style="text-transform: uppercase;">{{$row->BUSINESS_NAME}} <br> ({{$row->BUSINESS_NATURE_NAME}})</td>
 								<td>{{$row->BUSINESS_ADDRESS}}</td>
 								<td>{{$row->BUSINESS_OWNER_LASTNAME}}, {{$row->BUSINESS_OWNER_FIRSTNAME}}, {{$row->BUSINESS_OWNER_MIDDLENAME}}</td>
 								{{-- <td>{{$row->BUSINESS_OR_ACQUIRED_DATE}}</td> --}}
@@ -118,7 +118,7 @@
 						@endif
 								<td>
 									<button type="button" class="btn btn-warning"  id="btn_view" >
-										<i class="fa fa-eye"></i> View
+										<i class="fa fa-eye"></i> View&nbsp;&nbsp;&nbsp;
 									</button>
 									<button type="button" class="btn btn-yellow" id="btnRenewOpen">
 										<i class="fa fa-circle"></i> Renew
@@ -165,14 +165,14 @@
 
 	<div class="modal fade" id="modal-Renew" data-backdrop="static">
 		<div class="modal-dialog" style="max-width: 50%">
-			<form id="EditForm">
+			<form id="RenewForm">
 				<div class="modal-content">
 					<div class="modal-header" style="background-color: #ffd900">
 						<h4 class="modal-title" style="color: black">Renew Business</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color: white">×</button>
 					</div>
 					<div class="modal-body">
-						<input type="text" id="txt_business_id" hidden><h3><label id="lbl_business_name">WBB Toy Shop</label></h3>
+						<input type="text" hidden><h3><label id="lbl_business_name">WBB Toy Shop</label></h3>
 						{{--modal body start--}}
 						<h4>Business Details</h4>
 						{{-- 1 --}}
@@ -838,7 +838,26 @@ $('#tbl_business_lst').on('click', '#btn_view', function(){
 });
 
 $('#btnSubmitBusinessRegistration').on('click', function(){
-		// alert('here');
+		
+		
+		var lineofbusiness = [], noofunit = [], capitalization = [], e_grossreceipt = [], n_grossreceipt = [];
+		$("input[name='lineofbusiness[]']").each(function() {
+    		lineofbusiness.push($( this ).val());
+		});
+		$("input[name='noofunit[]']").each(function() {
+    		noofunit.push($( this ).val());
+		});
+		$("input[name='capitalization[]']").each(function() {
+    		capitalization.push($( this ).val());
+		});
+		$("input[name='e_grossreceipt[]']").each(function() {
+    		e_grossreceipt.push($( this ).val());
+		});
+		$("input[name='n_grossreceipt[]']").each(function() {
+    		n_grossreceipt.push($( this ).val());
+		});
+
+
 
 		var   BusinessNumber = $('#txt_business_number').val()
 			, BusinessName = $('#txt_business_name').val()
@@ -876,10 +895,11 @@ $('#btnSubmitBusinessRegistration').on('click', function(){
 			, LessorTelephone =  $('#txt_lessor_telephone').val()
 			, MonthlyRental = $('#txt_monthly_rental').val()
 			// Business Address
-			, BuildingNumber = $('#txt_building_no').val()
-			, BuildingName = $('#txt_building_name').val()
-			, UnitNo = $('#txt_unit_no').val()
-			, Street = $('#txt_street').val()
+			, BusinessAddress = $('#txt_business_address').val()
+			//, BuildingNumber = $('#txt_building_no').val()
+			//, BuildingName = $('#txt_building_name').val()
+			//, UnitNo = $('#txt_unit_no').val()
+			//, Street = $('#txt_street').val()
 
 			;
 
@@ -923,46 +943,83 @@ $('#btnSubmitBusinessRegistration').on('click', function(){
 		// ,'LESSOR_MOBILE_NO' : LessorMobile
 		,'LESSOR_EMAIL_ADD' : LessorEmail
 		,'MONTHLY_RENTAL' : MonthlyRental
-		// ,'BUSINESS_OR_ACQUIRED_DATE' : DateAcquired
-		,'BUILDING_NUMBER' : BuildingNumber
-		,'BUILDING_NAME' : BuildingName
-		,'UNIT_NO' : UnitNo
-		,'STREET' : Street
+
+		,'LINE_OF_BUSINESS_ID' : LineOfBusiness		
+		,'NO_OF_UNITS' : noofunit
+		,'CAPITALIZATION' : capitalization
+		,'GROSS_RECEIPTS_ESSENTIAL' : e_grossreceipt
+		,'GROSS_RECEIPTS_NON_ESSENTIAL' : n_grossreceipt
+		,'BUSINESS_ADDRESS' : BusinessAddress
 		,'NEW_RENEW_STATUS': 'New'
 	};
 
-	$.ajax({
-		url : "{{ route('CRUDBusinessApplication') }}",
-		method : 'POST',
-		data : data,
-		success : function(response) {
-			swal({
-				title: 'Success',
-				text: 'Saved Record!',
-				icon: 'success',
-			});
-			window.location.reload();
+	// $.ajax({
+	// 	url : "{{ route('CRUDBusinessApplication') }}",
+	// 	method : 'POST',
+	// 	data : data,
+	// 	success : function(response) {
+	// 		swal({
+	// 			title: 'Success',
+	// 			text: 'Saved Record!',
+	// 			icon: 'success',
+	// 		});
+	// 		window.location.reload();
 			
 
-		},
-		error : function(error){
-			console.log("error: " + error);
-		}
-	});	
+	// 	},
+	// 	error : function(error){
+	// 		console.log("error: " + error);
+	// 	}
+	// });	
 
 
 });
 
-	$('#btnAddBusinessActivity').on('click', function(){
-		$('#tbl_business_acitivity').find('tbody').append(
-			'<tr class="classTrBusinessActivity">\n'
-			+ '<td><input type="text" id="" name="lineofbusiness" class="form-control"></td> \n'
-			+ '<td><input type="text" id="" name="noofunit" class="form-control"></td> \n'
-			+ '<td><input type="text" id="" name="capitalization" class="form-control"></td> \n'
-			+ '<td><input type="text" id="" name="grossreceipt" class="form-control"></td> \n'
-			+ '<td><a class="btn btn-danger" onclick="if($(\'#tbl_business_acitivity tbody tr\').length>1)$(this).closest(\'tr\').remove()"><i class="fa fa-minus text-white"></i></a></td>\n' 
-			+ '</tr> \n'
-			);
+//line_of_business
+// <select class="form-control" id="sel_business_type_renew" data-parsley-required="true">
+//                                         <option >-- Type of Business --</option>
+//                                         <option value="Single">Single</option>
+//                                         <option value="Partnership">Partnership</option>
+//                                         <option value="Corporation">Corporation</option>
+//                                         <option value="Cooperative">Cooperative</option>
+//                                     </select>
+	$('#btnAddBusinessActivity').on('click', function() {
+
+
+		let data = {
+			'_token' : " {{ csrf_token() }}"
+		};
+		
+		$.ajax({
+			url: "{{route('getLineofBusiness')}}"
+			,type: 'get'
+			,data:data
+			,success:function(response) {
+				
+				
+				$('#tbl_business_acitivity').find('tbody').append(
+				'<tr class="classTrBusinessActivity">\n'
+				+ '<td><select class="form-control lineofbusiness"  >\n'
+					
+				+'</select>\n'
+				+ '</td> \n'
+				+ '<td><input type="text" name="noofunit[]" class="form-control"></td> \n'
+				+ '<td><input type="text" name="capitalization[]" class="form-control"></td> \n'
+				+ '<td><input type="text" name="e_grossreceipt[]" class="form-control"></td> \n'
+				+ '<td><input type="text" name="n_grossreceipt[]" class="form-control"></td> \n'
+				+ '<td><a class="btn btn-danger" onclick="if($(\'#tbl_business_acitivity tbody tr\').length>1)$(this).closest(\'tr\').remove()"><i class="fa fa-minus text-white"></i></a></td>\n' 
+				+ '</tr> \n'
+				);
+
+
+				$.each(response["line_of_business"], function() {
+					$('.lineofbusiness').append(`<option value="${this['LINE_OF_BUSINESS_ID']}"> 
+                                   ${this['LINE_OF_BUSINESS_NAME']} 
+                              </option>`);
+				});
+			}
+		});
+		
 	});
 
 	$('#btnBusinessRenewal').on('click', function(){

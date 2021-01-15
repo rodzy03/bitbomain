@@ -9,6 +9,8 @@
 | contains the "web" middleware GROUP. Now create something great!
 |
 */
+
+Route::get('/getLineofBusiness','BusinessController@getLineofBusiness')->NAME('getLineofBusiness');
 Route::group(['prefix' => ''], function (){
     Route::POST('/LoginMobile', 'MobileLoginController@signin')
         ->name('LoginMobile');
